@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rRa-JR-vhm">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Pokemons View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="PokemonsViewController" customModule="Pokemon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VS3-lH-jvS">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2Zr-zO-gvf">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="AYc-FP-tDX">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="VS3-lH-jvS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6NG-SH-cgF"/>
+                            <constraint firstItem="VS3-lH-jvS" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Cqk-VV-ah8"/>
+                            <constraint firstItem="VS3-lH-jvS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="aEC-tX-oOg"/>
+                            <constraint firstItem="VS3-lH-jvS" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="e57-U4-PMS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="bzM-Ux-NQL"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2015.2" y="133.5832083958021"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="EBu-SF-UJ4">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="rRa-JR-vhm" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CjW-6b-fCQ">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="t49-GH-Lqd" kind="relationship" relationship="viewControllers" id="w7g-Zl-Aee"/>
+                        <segue destination="Sx3-O5-yZj" kind="relationship" relationship="viewControllers" id="Hr7-iD-XrA"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vur-di-on0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="159" y="573"/>
+        </scene>
+        <!--Art-->
+        <scene sceneID="LVH-Xc-OpE">
+            <objects>
+                <viewController id="Sx3-O5-yZj" customClass="ZoomImageViewController" customModule="Pokemon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="f1y-cY-ijW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" bounces="NO" maximumZoomScale="5" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d0G-JD-Vbv">
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pokemon_map" translatesAutoresizingMaskIntoConstraints="NO" id="7Zd-KQ-aLR">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="598"/>
+                                        <gestureRecognizers/>
+                                        <viewLayoutGuide key="safeArea" id="XDx-No-y7G"/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="RIn-ND-atk" appends="YES" id="CVg-DJ-aLb"/>
+                                        </connections>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="7Zd-KQ-aLR" firstAttribute="centerX" secondItem="d0G-JD-Vbv" secondAttribute="centerX" id="8y4-61-odC"/>
+                                    <constraint firstItem="7Zd-KQ-aLR" firstAttribute="top" secondItem="d0G-JD-Vbv" secondAttribute="top" id="AZ7-Kj-Ild"/>
+                                    <constraint firstAttribute="bottom" secondItem="7Zd-KQ-aLR" secondAttribute="bottom" id="a9q-HQ-5Wv"/>
+                                    <constraint firstItem="7Zd-KQ-aLR" firstAttribute="centerY" secondItem="d0G-JD-Vbv" secondAttribute="centerY" id="bLM-YL-5qg"/>
+                                    <constraint firstItem="7Zd-KQ-aLR" firstAttribute="leading" secondItem="d0G-JD-Vbv" secondAttribute="leading" id="iew-Wu-cEv"/>
+                                    <constraint firstAttribute="trailing" secondItem="7Zd-KQ-aLR" secondAttribute="trailing" id="jLb-8P-Mpc"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="rgT-VN-xci"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="d0G-JD-Vbv" firstAttribute="trailing" secondItem="0sK-X1-AKa" secondAttribute="trailing" id="09C-D6-ejh"/>
+                            <constraint firstItem="d0G-JD-Vbv" firstAttribute="leading" secondItem="f1y-cY-ijW" secondAttribute="leading" id="5cN-de-G3k"/>
+                            <constraint firstItem="d0G-JD-Vbv" firstAttribute="bottom" secondItem="0sK-X1-AKa" secondAttribute="bottom" id="ec2-wd-ugq"/>
+                            <constraint firstItem="d0G-JD-Vbv" firstAttribute="top" secondItem="0sK-X1-AKa" secondAttribute="top" id="pe2-d3-XiO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0sK-X1-AKa"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Art" image="bar_photo" id="1y6-us-2Wq"/>
+                    <connections>
+                        <outlet property="imageView" destination="7Zd-KQ-aLR" id="efJ-9i-Wxi"/>
+                        <outlet property="scrollView" destination="d0G-JD-Vbv" id="SKD-4m-hco"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zy6-1H-Fao" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="RIn-ND-atk">
+                    <connections>
+                        <action selector="dubleTapAction:" destination="Sx3-O5-yZj" id="Bej-PQ-Ve1"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1076" y="827.13643178410803"/>
+        </scene>
+        <!--Pokemons-->
+        <scene sceneID="ZrF-sw-gwN">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="t49-GH-Lqd" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Pokemons" image="bar_pokemon" id="Lvc-Z6-A7s"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="evg-rQ-TLI">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Izx-TW-Epi"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HoF-Zd-1LB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1076" y="133.5832083958021"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="bar_photo" width="30" height="30"/>
+        <image name="bar_pokemon" width="30" height="30"/>
+        <image name="pokemon_map" width="2750" height="2408"/>
+    </resources>
+</document>
