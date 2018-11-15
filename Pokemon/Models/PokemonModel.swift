@@ -8,21 +8,28 @@
 
 import Foundation
 
-struct PokemonModel: Decodable {
-    let name: String
-    let url: String
-//    let details: PokemonDetails?
-    
-    init(name: String, url: String) {
-        self.name = name
-        self.url = url
-    }
+struct PokemonList: Codable {
+    let count: Int
+    let next: String
+    let previous: String
+    var results: [Pokemon]
 }
 
-struct PokemonDetails: Decodable {
-    let imageUrl: String
-    
-    init(imageUrl: String) {
-        self.imageUrl = imageUrl
-    }
+struct Pokemon: Codable {
+    let name: String
+    let url: String
+    var info: PokemonDetails?
+}
+
+struct PokemonDetails: Codable {
+    let base_experience: Int
+    let height: Int
+    let id: Int
+    let name: String
+    let weight: Int
+    let sprites: Sprites
+}
+
+struct Sprites: Codable {
+    let front_default: String
 }

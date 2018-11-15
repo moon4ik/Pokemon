@@ -17,8 +17,8 @@ protocol PokemonsPresenterProtocol {
 
 class PokemonsPresenter: PokemonsPresenterProtocol {
     
-    private weak let view: PokemonsVCProtocol
-    var pokemons = [PokemonModel]()
+    private let view: PokemonsVCProtocol
+    var pokemons: Array<Pokemon> = [Pokemon]()
     
     required init(view: PokemonsVCProtocol) {
         self.view = view
@@ -31,15 +31,22 @@ class PokemonsPresenter: PokemonsPresenterProtocol {
     func configurateCell(cell: PokemonCVCellProtocol, row: Int) {
         let pokemon = self.pokemons[row]
         cell.setup(name: pokemon.name)
-//        cell.setup(image: UIImage)
     }
     
     func loadPokemons() {
-        let requestManager = RequestManager()
-        requestManager.getPokemons(completion: { (pokemons: Array<PokemonModel>) in
-            print("ARRAY: \(pokemons.count)")
-        }) { (error) in
-            print("ERROR: \(error)")
+        let networkService = NetworkService()
+        networkService.getPokemonsList(completion: { (pokemonList) in
+            for (idx, pokemon) in pokemonList.results.enumerated() {
+                networkService.getPokemon(name: pokemon.name,
+                                          completion: { (pokemonDetails) in
+                                            print(idx)
+                },
+                                          failure: { (serverError) in
+                                            print("ERROR: \(serverError.statusCode ?? 666)  \(serverError.errorMessage ?? "")")
+                })
+            }
+        }) { (serverError) in
+            print("ERROR: \(serverError.statusCode ?? 666)  \(serverError.errorMessage ?? "")")
         }
     }
     

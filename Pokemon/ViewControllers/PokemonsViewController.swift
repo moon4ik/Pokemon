@@ -19,7 +19,7 @@ class PokemonsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setup(presenter: PokemonsPresenter(view: self))
+        self.setup(presenter: PokemonsPresenter(view: self as! PokemonsVCProtocol))
     }
 
     func setup(presenter: PokemonsPresenterProtocol) {

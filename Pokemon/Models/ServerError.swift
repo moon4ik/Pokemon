@@ -1,5 +1,5 @@
 //
-//  ErrorModel.swift
+//  ServerError.swift
 //  Pokemon
 //
 //  Created by Oleksii Mykhailenko on 13/11/18.
@@ -8,6 +8,7 @@
 
 import Foundation
 
-struct ErrorModel: Decodable {
-    let errorText: String
+struct ServerError: Codable {
+    let errorMessage: String?
+    let statusCode: Int?
 }

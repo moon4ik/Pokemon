@@ -12,12 +12,14 @@ import Moya
 enum PokemonAPI {
     case getAllPokemon
     case getAllLanguages
+    case getPokemonById(id: Int)
+    case getPokemonByName(name: String)
 }
 
 extension PokemonAPI: TargetType {
     
     var baseURL: URL {
-        guard let url = URL(string: "https://pokeapi.co/api/v2") else {
+        guard let url = URL(string: Constants.baseURL) else {
             fatalError("Error cannot be configured")
         }
         return url
@@ -25,23 +27,23 @@ extension PokemonAPI: TargetType {
     
     var path: String {
         switch self {
-        case .getAllPokemon:
-            return "/pokemon"
-        case .getAllLanguages:
-            return "/language"
+        case .getAllPokemon: return "pokemon"
+        case .getAllLanguages: return "language"
+        case .getPokemonById(let id): return "pokemon/\(id)/"
+        case .getPokemonByName(let name): return "pokemon/\(name)/"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getAllPokemon, .getAllLanguages:
+        case .getAllPokemon, .getAllLanguages, .getPokemonById, .getPokemonByName:
             return .get
         }
     }
     
     var task: Task {
         switch self {
-        case .getAllLanguages, .getAllPokemon:
+        case .getAllLanguages, .getAllPokemon, .getPokemonById, .getPokemonByName:
             return .requestPlain
         }
     }
@@ -54,10 +56,4 @@ extension PokemonAPI: TargetType {
         return "I don't know why.".utf8Encoded
     }
     
-}
-
-private extension String {
-    var utf8Encoded: Data {
-        return data(using: .utf8)!
-    }
 }
