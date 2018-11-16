@@ -127,8 +127,12 @@ class PokemonsViewController: UIViewController {
 extension PokemonsViewController: PokemonsVCProtocol {
     
     func reloadData() {
-        activityIndicator.stopAnimating()
-        refreshControl.endRefreshing()
+        if activityIndicator.isAnimating {
+            activityIndicator.stopAnimating()
+        }
+        if refreshControl.isRefreshing {
+            refreshControl.endRefreshing()
+        }
         collectionView.reloadData()
     }
     

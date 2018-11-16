@@ -98,24 +98,29 @@ class PokemonsPresenter: PokemonsPresenterProtocol {
         let end = (begin + limit) > maxCount ? maxCount : (begin + limit)
         
         print("\(begin) - \(end)")
-        if begin < pokemonList?.count ?? 0 {
-            var count: Int = 0
-            for idx in begin..<end {
-                requestService.getPokemonBy(
-                    id: pokemonsIds[idx],
-                    completion: { [weak self] (pokemon) in
-                        guard let `self` = self else { return }
-                        count += 1
-                        self.pokemons.insert(pokemon)
-                        if count == self.limit {
-                            self.pokemonsArray = self.pokemons.sorted(by: { (lhs, rhs) -> Bool in
-                                lhs.id < rhs.id
-                            })
-                            self.view.reloadData()
-                            self.isLoading = false
-                        }
-                }) { [weak self] (error) in
-                    print("error: \(idx) - pokemonID: \(self?.pokemonsIds[idx] ?? 0)")
+        DispatchQueue.global().async { [weak self] in
+            guard let `self` = self else { return }
+            if begin < self.pokemonList?.count ?? 0 {
+                var count: Int = 0
+                for idx in begin..<end {
+                    self.requestService.getPokemonBy(
+                        id: self.pokemonsIds[idx],
+                        completion: {(pokemon) in
+                            
+                            count += 1
+                            self.pokemons.insert(pokemon)
+                            if count == self.limit {
+                                self.pokemonsArray = self.pokemons.sorted(by: { (lhs, rhs) -> Bool in
+                                    lhs.id < rhs.id
+                                })
+                                DispatchQueue.main.async {
+                                    self.view.reloadData()
+                                    self.isLoading = false
+                                }
+                            }
+                    }) { [weak self] (error) in
+                        print("error: \(idx) - pokemonID: \(self?.pokemonsIds[idx] ?? 0)")
+                    }
                 }
             }
         }
