@@ -25,6 +25,7 @@ class PokemonsViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var gridBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var noDataLabel: UILabel!
     fileprivate let refreshControl = UIRefreshControl()
     fileprivate var gridType: GridType = .two {
         didSet {
@@ -101,13 +102,16 @@ class PokemonsViewController: UIViewController {
             gridBarButtonItem.image = Constants.images.barItems.three
             break
         }
-        UIView.animate(withDuration: 1, delay: 0,
-                       usingSpringWithDamping: 0.8,
-                       initialSpringVelocity: 5,
-                       options: .curveEaseOut,
-                       animations: { [weak self] in
-                        self?.collectionView.collectionViewLayout = flowLayout
-            }, completion: nil)
+        UIView.animate(withDuration: 1) {
+            self.collectionView.collectionViewLayout = flowLayout
+        }
+//        UIView.animate(withDuration: 1, delay: 0,
+//                       usingSpringWithDamping: 0.8,
+//                       initialSpringVelocity: 5,
+//                       options: .curveEaseOut,
+//                       animations: { [weak self] in
+//                        self?.collectionView.collectionViewLayout = flowLayout
+//            }, completion: nil)
     }
     
     @objc func pullToRefresh() {
@@ -138,7 +142,9 @@ extension PokemonsViewController: PokemonsVCProtocol {
 extension PokemonsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter.numberOfRows(inSection: section)
+        let rowsCount = presenter.numberOfRows(inSection: section)
+        noDataLabel.isHidden = (rowsCount > 0) && !presenter.isFiltered()
+        return rowsCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

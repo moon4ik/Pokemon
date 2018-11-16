@@ -43,6 +43,12 @@
                                 <rect key="frame" x="169" y="315" width="37" height="37"/>
                                 <color key="color" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Result not found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A0T-P3-Pck">
+                                <rect key="frame" x="125.5" y="323.5" width="124" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <searchBar contentMode="redraw" placeholder="Search by Name or Id" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FnY-jJ-FrN">
                                 <rect key="frame" x="0.0" y="64" width="375" height="56"/>
                                 <constraints>
@@ -53,6 +59,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="A0T-P3-Pck" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="2zT-7V-sKp"/>
                             <constraint firstItem="VS3-lH-jvS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6NG-SH-cgF"/>
                             <constraint firstItem="VS3-lH-jvS" firstAttribute="top" secondItem="FnY-jJ-FrN" secondAttribute="bottom" id="9LD-Pc-F6o"/>
                             <constraint firstItem="FnY-jJ-FrN" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="A91-us-vZX"/>
@@ -61,6 +68,7 @@
                             <constraint firstItem="MXa-O9-F54" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="U8Y-mq-VoI"/>
                             <constraint firstItem="VS3-lH-jvS" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="e57-U4-PMS"/>
                             <constraint firstItem="FnY-jJ-FrN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jxj-tM-txd"/>
+                            <constraint firstItem="A0T-P3-Pck" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tzP-6W-4uN"/>
                             <constraint firstItem="MXa-O9-F54" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ytQ-1L-98z"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -76,6 +84,7 @@
                         <outlet property="activityIndicator" destination="MXa-O9-F54" id="cvj-XS-VxZ"/>
                         <outlet property="collectionView" destination="VS3-lH-jvS" id="dBa-T2-usQ"/>
                         <outlet property="gridBarButtonItem" destination="Fk5-5m-ggf" id="ObU-xq-dzx"/>
+                        <outlet property="noDataLabel" destination="A0T-P3-Pck" id="hL7-nk-hM6"/>
                         <outlet property="searchBar" destination="FnY-jJ-FrN" id="6Vc-Ik-wkl"/>
                     </connections>
                 </viewController>

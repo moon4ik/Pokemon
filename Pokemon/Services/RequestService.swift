@@ -27,10 +27,12 @@ struct RequestService {
                     let model = try JSONDecoder().decode(PokemonList.self, from: response.data)
                     completion(model)
                 } catch let error {
+                    Logger.write("ERROR \(response.statusCode) - \(error.localizedDescription)")
                     failure(ServerError(errorMessage: error.localizedDescription,
                                         statusCode: response.statusCode))
                 }
             case .failure(let error):
+                Logger.write("ERROR \(String(describing: error.response?.statusCode)) - \(error.localizedDescription)")
                 failure(ServerError(errorMessage: error.localizedDescription,
                                     statusCode: error.response?.statusCode ?? 0))
             }
@@ -52,10 +54,12 @@ struct RequestService {
                     let model = try JSONDecoder().decode(Pokemon.self, from: response.data)
                     completion(model)
                 } catch let error {
+                    Logger.write("ERROR \(response.statusCode) - \(error.localizedDescription)")
                     failure(ServerError(errorMessage: error.localizedDescription,
                                         statusCode: response.statusCode))
                 }
             case .failure(let error):
+                Logger.write("ERROR \(String(describing: error.response?.statusCode)) - \(error.localizedDescription)")
                 failure(ServerError(errorMessage: error.localizedDescription,
                                     statusCode: error.response?.statusCode ?? 0))
             }
@@ -77,10 +81,12 @@ struct RequestService {
                     let model = try JSONDecoder().decode(Pokemon.self, from: response.data)
                     completion(model)
                 } catch let error {
+                    Logger.write("ERROR \(response.statusCode) - \(error.localizedDescription)")
                     failure(ServerError(errorMessage: error.localizedDescription,
                                         statusCode: response.statusCode))
                 }
             case .failure(let error):
+                Logger.write("ERROR \(String(describing: error.response?.statusCode)) - \(error.localizedDescription)")
                 failure(ServerError(errorMessage: error.localizedDescription,
                                     statusCode: error.response?.statusCode ?? 0))
             }

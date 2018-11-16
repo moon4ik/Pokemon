@@ -20,6 +20,8 @@ protocol PokemonsPresenterProtocol {
     func changeLimit(grid: GridType)
     func pullToRefresh()
     func filter(searchText: String)
+    func isLoadingDate() -> Bool
+    func isFiltered() -> Bool
 }
 
 class PokemonsPresenter: PokemonsPresenterProtocol {
@@ -78,6 +80,8 @@ class PokemonsPresenter: PokemonsPresenterProtocol {
                 self?.pokemonsIds.append(itemId)
             }
             self?.pokemonsIds.count == pokemonList.count ? print("✅ \(pokemonList.count) ids parsed") : print("🅾️ ids parsed")
+            self?.isLoading = false
+            self?.isFiltering = false
             self?.loadMore()
         }) { (serverError) in
             print("ERROR: \(String(describing: serverError.statusCode))  \(String(describing: serverError.errorMessage))")
@@ -161,5 +165,13 @@ class PokemonsPresenter: PokemonsPresenterProtocol {
             return searchText.lowercased() == pokemon.id.stringValue.lowercased() || pokemon.name.lowercased().contains(searchText.lowercased())
         })
         view.reloadData()
+    }
+    
+    func isLoadingDate() -> Bool {
+        return isLoading
+    }
+    
+    func isFiltered() -> Bool {
+        return isFiltering
     }
 }

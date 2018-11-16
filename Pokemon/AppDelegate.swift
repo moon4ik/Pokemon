@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         ImageCacheService.setupCache()
+        Logger.removeOlderThan(days: 3)
         
         return true
     }
