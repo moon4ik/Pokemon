@@ -65,8 +65,8 @@ class PokemonDetailsViewController: UIViewController {
     }
     
     func setupUI() {
-        avatarImageView.layer.addShadow()
         avatarImageView.layer.masksToBounds = true
+        avatarImageView.layer.addShadow()
     }
 }
 
@@ -101,7 +101,7 @@ extension PokemonDetailsViewController: PokemonDetailsVCProtocol {
     
     func setupLabel(experience: Int) {
         experienceLabel.text = """
-        My IQ is \(experience.stringValue) and your?
+        My IQ is \(experience.stringValue) and what is yours?
         Do you know what is IQ? 🤪😂😝😜
         """
     }

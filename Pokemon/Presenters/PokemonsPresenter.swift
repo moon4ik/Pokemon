@@ -19,6 +19,7 @@ protocol PokemonsPresenterProtocol {
     func limitCount() -> Int
     func changeLimit(grid: GridType)
     func pullToRefresh()
+    func filter(searchText: String)
 }
 
 class PokemonsPresenter: PokemonsPresenterProtocol {
@@ -31,6 +32,9 @@ class PokemonsPresenter: PokemonsPresenterProtocol {
     fileprivate var isLoading: Bool = false
     fileprivate let requestService = RequestService()
     fileprivate var limit: Int = 20
+    fileprivate var isFiltering: Bool = false
+    fileprivate var filteredArray = Array<Pokemon>()
+    
     
     //MARK: - PokemonsPresenterProtocol
     
@@ -39,12 +43,25 @@ class PokemonsPresenter: PokemonsPresenterProtocol {
     }
     
     func numberOfRows(inSection: Int) -> Int {
-        return pokemons.count
+        let count: Int
+        if isFiltering {
+            count = filteredArray.count
+        } else {
+            count = pokemonsArray.count
+        }
+        return count
     }
     
     func configurateCell(cell: PokemonCVCellProtocol, row: Int) {
-        if row < pokemonsArray.count {
-            let pokemon = pokemonsArray[row]
+        let pokemon: Pokemon
+        if isFiltering, row < filteredArray.count {
+            pokemon = filteredArray[row]
+            cell.setupLabel(name: pokemon.name)
+            if let url = URL(string: pokemon.sprites.front_default) {
+                cell.setupImage(url: url)
+            }
+        } else if row < pokemonsArray.count {
+            pokemon = pokemonsArray[row]
             cell.setupLabel(name: pokemon.name)
             if let url = URL(string: pokemon.sprites.front_default) {
                 cell.setupImage(url: url)
@@ -68,7 +85,7 @@ class PokemonsPresenter: PokemonsPresenterProtocol {
     }
     
     func loadMore() {
-        guard !isLoading else {
+        guard !isLoading && !isFiltering else {
             return
         }
         isLoading = true
@@ -102,7 +119,9 @@ class PokemonsPresenter: PokemonsPresenterProtocol {
     
     func didSelectCell(row: Int) {
         let viewController: PokemonDetailsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PokemonDetailsViewController") as! PokemonDetailsViewController
-        if row < pokemonsArray.count {
+        if isFiltering, row < filteredArray.count {
+            viewController.pokemon = filteredArray[row]
+        } else if row < pokemonsArray.count {
             viewController.pokemon = pokemonsArray[row]
         }
         view.present(viewController: viewController)
@@ -134,5 +153,13 @@ class PokemonsPresenter: PokemonsPresenterProtocol {
         pokemons.removeAll()
         //Load new data
         loadPokemons()
+    }
+    
+    func filter(searchText: String) {
+        isFiltering = !searchText.isEmpty
+        filteredArray = pokemonsArray.filter({ (pokemon) -> Bool in
+            return searchText.lowercased() == pokemon.id.stringValue.lowercased() || pokemon.name.lowercased().contains(searchText.lowercased())
+        })
+        view.reloadData()
     }
 }

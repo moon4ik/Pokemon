@@ -21,6 +21,8 @@ enum GridType: Int {
 
 class PokemonsViewController: UIViewController {
     
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var gridBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
     fileprivate let refreshControl = UIRefreshControl()
@@ -46,6 +48,7 @@ class PokemonsViewController: UIViewController {
         setupPresenter()
         setupCollectioView()
         setupGrid()
+        setupSearchBar()
     }
     
     private func setupNavigation() {
@@ -54,6 +57,7 @@ class PokemonsViewController: UIViewController {
     
     private func setupPresenter() {
         presenter = PokemonsPresenter(view: self)
+        activityIndicator.startAnimating()
         presenter.loadPokemons()
     }
     
@@ -70,6 +74,10 @@ class PokemonsViewController: UIViewController {
         gridType = .two
         collectionView.collectionViewLayout = TwoColumnFlowLayout()
         gridBarButtonItem.image = Constants.images.barItems.three
+    }
+    
+    private func setupSearchBar() {
+        searchBar.delegate = self
     }
     
     //MARK: - Actions
@@ -112,6 +120,8 @@ class PokemonsViewController: UIViewController {
 extension PokemonsViewController: PokemonsVCProtocol {
     
     func reloadData() {
+        activityIndicator.stopAnimating()
+        refreshControl.endRefreshing()
         collectionView.reloadData()
     }
     
@@ -141,6 +151,37 @@ extension PokemonsViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row > presenter.numberOfRows(inSection: indexPath.section)-presenter.limitCount() {
             presenter.loadMore()
+        }
+    }
+}
+
+extension PokemonsViewController: UISearchBarDelegate {
+ 
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        presenter.filter(searchText: "")
+        view.endEditing(true)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let text = searchBar.text, !text.isEmpty {
+            presenter.filter(searchText: text)
+            view.endEditing(true)
+        } else {
+            
+        }
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        if let text = searchBar.text, text.isEmpty {
+            presenter.filter(searchText: "")
+            view.endEditing(true)
+        }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if (searchText.isEmpty) {
+            presenter.filter(searchText: "")
         }
     }
 }

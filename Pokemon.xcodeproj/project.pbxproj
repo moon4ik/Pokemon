@@ -38,7 +38,6 @@
 		7340A14B219E3F3F00A4BC40 /* ThreeColumnFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7340A14A219E3F3F00A4BC40 /* ThreeColumnFlowLayout.swift */; };
 		7340A14D219E3F4F00A4BC40 /* FourColumnFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7340A14C219E3F4F00A4BC40 /* FourColumnFlowLayout.swift */; };
 		7340A14F219E4EA500A4BC40 /* ReachabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7340A14E219E4EA500A4BC40 /* ReachabilityService.swift */; };
-		7340A153219E742F00A4BC40 /* SearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7340A152219E742F00A4BC40 /* SearchCollectionReusableView.swift */; };
 		F9FB5D8903567EAB7A5550B8 /* Pods_PokemonTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADF968AFC45CA5A35E5233E8 /* Pods_PokemonTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -89,7 +88,6 @@
 		7340A14A219E3F3F00A4BC40 /* ThreeColumnFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeColumnFlowLayout.swift; sourceTree = "<group>"; };
 		7340A14C219E3F4F00A4BC40 /* FourColumnFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourColumnFlowLayout.swift; sourceTree = "<group>"; };
 		7340A14E219E4EA500A4BC40 /* ReachabilityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityService.swift; sourceTree = "<group>"; };
-		7340A152219E742F00A4BC40 /* SearchCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableView.swift; sourceTree = "<group>"; };
 		A75F8CB49B52D1222EBCA454 /* Pods-Pokemon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pokemon.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pokemon/Pods-Pokemon.release.xcconfig"; sourceTree = "<group>"; };
 		ADF968AFC45CA5A35E5233E8 /* Pods_PokemonTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PokemonTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE59EBFE0647B0151CA1B06E /* Pods-PokemonTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokemonTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PokemonTests/Pods-PokemonTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -229,7 +227,6 @@
 			isa = PBXGroup;
 			children = (
 				7340A12D219B8F6800A4BC40 /* PokemonCollectionCell */,
-				7340A152219E742F00A4BC40 /* SearchCollectionReusableView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -489,7 +486,6 @@
 				7340A13A219DF55F00A4BC40 /* Sprites.swift in Sources */,
 				7340A117219A327300A4BC40 /* RequestService.swift in Sources */,
 				7340A14D219E3F4F00A4BC40 /* FourColumnFlowLayout.swift in Sources */,
-				7340A153219E742F00A4BC40 /* SearchCollectionReusableView.swift in Sources */,
 				7340A140219E28E700A4BC40 /* AlertService.swift in Sources */,
 				7340A134219CD7A500A4BC40 /* Constants.swift in Sources */,
 			);
@@ -584,7 +580,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -639,7 +635,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
