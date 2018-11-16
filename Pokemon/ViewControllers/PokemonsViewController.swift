@@ -111,6 +111,9 @@ class PokemonsViewController: UIViewController {
     }
     
     @objc func pullToRefresh() {
+        view.endEditing(true)
+        searchBar.text = ""
+        presenter.filter(searchText: "")
         presenter.pullToRefresh()
     }
 }
@@ -156,6 +159,10 @@ extension PokemonsViewController: UICollectionViewDataSource, UICollectionViewDe
 }
 
 extension PokemonsViewController: UISearchBarDelegate {
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        view.endEditing(true)
+    }
  
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
