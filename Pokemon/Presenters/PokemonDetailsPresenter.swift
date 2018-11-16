@@ -29,7 +29,7 @@ class PokemonDetailsPresenter: PokemonDetailsPresenterProtocol {
     
     func updateViewController() {
         let isReachable = ReachabilityService.isReachable()
-        view.isNoDataLabel(show: isReachable)
+        view.isNoDataLabel(show: !isReachable)
         if isReachable, let pokemon = pokemon {
             view.setupTitle(text: pokemon.name)
             view.setupLabel(id: pokemon.id)
