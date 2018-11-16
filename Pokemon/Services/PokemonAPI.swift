@@ -10,8 +10,7 @@ import Foundation
 import Moya
 
 enum PokemonAPI {
-    case getAllPokemon
-    case getAllLanguages
+    case getAllPokemons
     case getPokemonById(id: Int)
     case getPokemonByName(name: String)
 }
@@ -27,8 +26,7 @@ extension PokemonAPI: TargetType {
     
     var path: String {
         switch self {
-        case .getAllPokemon: return "pokemon"
-        case .getAllLanguages: return "language"
+        case .getAllPokemons: return "pokemon"
         case .getPokemonById(let id): return "pokemon/\(id)/"
         case .getPokemonByName(let name): return "pokemon/\(name)/"
         }
@@ -36,15 +34,13 @@ extension PokemonAPI: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .getAllPokemon, .getAllLanguages, .getPokemonById, .getPokemonByName:
-            return .get
+        case .getAllPokemons, .getPokemonById, .getPokemonByName: return .get
         }
     }
     
     var task: Task {
         switch self {
-        case .getAllLanguages, .getAllPokemon, .getPokemonById, .getPokemonByName:
-            return .requestPlain
+        case .getAllPokemons, .getPokemonById, .getPokemonByName: return .requestPlain
         }
     }
     
@@ -53,7 +49,7 @@ extension PokemonAPI: TargetType {
     }
     
     var sampleData: Data {
-        return "I don't know why.".utf8Encoded
+        return "Sample data.".utf8Encoded
     }
     
 }
