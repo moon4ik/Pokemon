@@ -121,13 +121,20 @@ class PokemonsPresenter: PokemonsPresenterProtocol {
         }
     }
     
+    //MARK: - Prepare and push viewcontroller
     func didSelectCell(row: Int) {
         let viewController: PokemonDetailsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PokemonDetailsViewController") as! PokemonDetailsViewController
+        let pokemon: Pokemon
         if isFiltering, row < filteredArray.count {
-            viewController.pokemon = filteredArray[row]
+            pokemon = filteredArray[row]
         } else if row < pokemonsArray.count {
-            viewController.pokemon = pokemonsArray[row]
+            pokemon = pokemonsArray[row]
+        } else {
+            return
         }
+        let detailsPresenter = PokemonDetailsPresenter(view: viewController)
+        detailsPresenter.setupWith(pokemon: pokemon)
+        viewController.setup(presenter: detailsPresenter)
         view.present(viewController: viewController)
     }
     

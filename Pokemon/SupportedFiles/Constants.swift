@@ -14,6 +14,12 @@ struct Constants {
     //MARK: - URL
     
     static let baseURL: String = "https://pokeapi.co/api/v2/"
+    
+    //MARK: - Keys
+    
+    struct keys {
+        static let isShowZoomAlert: String = "isShowZoomAlert"
+    }
 
     //MARK: - Images
     

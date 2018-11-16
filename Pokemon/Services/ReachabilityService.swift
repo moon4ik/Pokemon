@@ -13,6 +13,10 @@ struct ReachabilityService {
     
     private static let reachability = Reachability()!
     
+    static func isReachable() -> Bool {
+        return reachability.connection != .none
+    }
+    
     static func start() {
         reachability.whenReachable = { reachability in
             if reachability.connection == .wifi {

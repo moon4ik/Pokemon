@@ -10,7 +10,7 @@ import UIKit
 
 protocol ZoomImageVCProtocol {
     func setupImage(image: UIImage?)
-    func showInfoAlert(text: String)
+    func showAlert(text: String, _ title: String?)
 }
 
 class ZoomImageViewController: UIViewController {
@@ -63,8 +63,10 @@ extension ZoomImageViewController: ZoomImageVCProtocol {
         imageView.image = image
     }
     
-    func showInfoAlert(text: String) {
-        AlertService.showAlertWith(message: text, viewController: self)
+    func showAlert(text: String, _ title: String?) {
+        AlertService.showAlertWith(title: title ?? "Error",
+                                   message: text,
+                                   viewController: self)
     }
 }
 

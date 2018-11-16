@@ -11,7 +11,7 @@ import UIKit
 
 struct AlertService {
     
-    static func showAlertWith(title: String = "Error",
+    static func showAlertWith(title: String,
                               message: String,
                               viewController: UIViewController) {
         let alertController = UIAlertController(title: title,

@@ -102,9 +102,8 @@ class PokemonsViewController: UIViewController {
             gridBarButtonItem.image = Constants.images.barItems.three
             break
         }
-        UIView.animate(withDuration: 1) {
-            self.collectionView.collectionViewLayout = flowLayout
-        }
+        self.collectionView.collectionViewLayout = flowLayout
+        self.collectionView.collectionViewLayout.invalidateLayout()
 //        UIView.animate(withDuration: 1, delay: 0,
 //                       usingSpringWithDamping: 0.8,
 //                       initialSpringVelocity: 5,
@@ -118,6 +117,7 @@ class PokemonsViewController: UIViewController {
         view.endEditing(true)
         searchBar.text = ""
         presenter.filter(searchText: "")
+        noDataLabel.isHidden = true
         presenter.pullToRefresh()
     }
 }
@@ -143,7 +143,7 @@ extension PokemonsViewController: UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let rowsCount = presenter.numberOfRows(inSection: section)
-        noDataLabel.isHidden = (rowsCount > 0) && !presenter.isFiltered()
+        noDataLabel.isHidden = !((rowsCount == 0) && presenter.isFiltered())
         return rowsCount
     }
     

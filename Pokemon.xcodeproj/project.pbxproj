@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0406DE65F4B22ADECE76E46D /* Pods_Pokemon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6112F17E4313638238E7266F /* Pods_Pokemon.framework */; };
+		4930AF12219ED6310031ECF8 /* DefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4930AF11219ED6310031ECF8 /* DefaultsService.swift */; };
 		7340A0F4219A284900A4BC40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7340A0F3219A284900A4BC40 /* AppDelegate.swift */; };
 		7340A0F6219A284900A4BC40 /* PokemonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7340A0F5219A284900A4BC40 /* PokemonsViewController.swift */; };
 		7340A0F9219A284900A4BC40 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7340A0F7219A284900A4BC40 /* Main.storyboard */; };
@@ -54,6 +55,7 @@
 
 /* Begin PBXFileReference section */
 		2092CB99E969A1686BDA0CFE /* Pods-PokemonTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokemonTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PokemonTests/Pods-PokemonTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4930AF11219ED6310031ECF8 /* DefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsService.swift; sourceTree = "<group>"; };
 		6112F17E4313638238E7266F /* Pods_Pokemon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pokemon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7340A0F0219A284900A4BC40 /* Pokemon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pokemon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7340A0F3219A284900A4BC40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				736CDE6E219E91E200F34342 /* Logger.swift */,
 				7340A13F219E28E700A4BC40 /* AlertService.swift */,
 				7340A14E219E4EA500A4BC40 /* ReachabilityService.swift */,
+				4930AF11219ED6310031ECF8 /* DefaultsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -491,6 +494,7 @@
 				7340A117219A327300A4BC40 /* RequestService.swift in Sources */,
 				7340A14D219E3F4F00A4BC40 /* FourColumnFlowLayout.swift in Sources */,
 				7340A140219E28E700A4BC40 /* AlertService.swift in Sources */,
+				4930AF12219ED6310031ECF8 /* DefaultsService.swift in Sources */,
 				7340A134219CD7A500A4BC40 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

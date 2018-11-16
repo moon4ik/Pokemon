@@ -23,5 +23,10 @@ class ZoomImagePresenter: ZoomImagePresenterProtocol {
     
     func setupImage() {
         view.setupImage(image: Constants.images.zoomImage)
+        if !DefaultsService.loadBool(forKey: Constants.keys.isShowZoomAlert) {
+            view.showAlert(text: "Pinch to zoom \n Duble tap for Zoom In/Out", "Info")
+            DefaultsService.saveBool(false, forKey: Constants.keys.isShowZoomAlert)
+        }
+        
     }
 }

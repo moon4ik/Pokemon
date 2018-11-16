@@ -16,6 +16,8 @@ protocol PokemonDetailsVCProtocol {
     func setupLabel(height: Int)
     func setupLabel(weight: Int)
     func setupLabel(experience: Int)
+    func setupTitle(text: String)
+    func isNoDataLabel(show: Bool)
 }
 
 class PokemonDetailsViewController: UIViewController {
@@ -30,10 +32,6 @@ class PokemonDetailsViewController: UIViewController {
     
     fileprivate var presenter: PokemonDetailsPresenterProtocol!
     
-    //TODO: ??? HOW TO ROUTE IN MVP ???
-    //FIXME: - MODEL :(
-    var pokemon: Pokemon?
-    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -44,27 +42,16 @@ class PokemonDetailsViewController: UIViewController {
     
     //MARK: - Setup
     
-    func setup() {
-        setupNavigationBar()
-        setupPresenter()
+    private func setup() {
         setupUI()
+        presenter.updateViewController()
     }
     
-    func setupNavigationBar() {
-        title = pokemon?.name.capitalized ?? "Details"
+    func setup(presenter: PokemonDetailsPresenter) {
+        self.presenter = presenter
     }
     
-    func setupPresenter() {
-        presenter = PokemonDetailsPresenter(view: self)
-        if let pokemon = pokemon {
-            noDataLabel.isHidden = true
-            presenter.setupWith(pokemon: pokemon)
-        } else {
-            noDataLabel.isHidden = false
-        }
-    }
-    
-    func setupUI() {
+    private func setupUI() {
         avatarImageView.layer.masksToBounds = true
         avatarImageView.layer.addShadow()
     }
@@ -81,6 +68,14 @@ extension PokemonDetailsViewController: PokemonDetailsVCProtocol {
                                     progressBlock: nil) { [weak self] (image, error, type, url) in
                                         self?.avatarImageView.kf.indicatorType = .none
         }
+    }
+    
+    func setupTitle(text: String) {
+        title = text.capitalized
+    }
+    
+    func isNoDataLabel(show: Bool) {
+        noDataLabel.isHidden = !show
     }
     
     func setupLabel(id: Int) {
