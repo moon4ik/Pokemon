@@ -10,7 +10,7 @@ import Foundation
 import Moya
 
 enum PokemonAPI {
-    case getAllPokemons
+    case getNextPokemons(offset: Int, limit: Int)
     case getPokemonById(id: Int)
     case getPokemonByName(name: String)
 }
@@ -18,29 +18,37 @@ enum PokemonAPI {
 extension PokemonAPI: TargetType {
     
     var baseURL: URL {
-        guard let url = URL(string: Constants.baseURL) else {
-            fatalError("Error cannot be configured")
+        var currentURL:String = Constants.baseURL
+        switch self {
+        case .getNextPokemons(let offset, let limit):
+            currentURL.append("?offset=\(offset)&limit=\(limit)")
+            fallthrough
+        default:
+            guard let url = URL(string: currentURL) else { fatalError("Error cannot be configured") }
+            return url
         }
-        return url
     }
     
     var path: String {
         switch self {
-        case .getAllPokemons: return "pokemon"
-        case .getPokemonById(let id): return "pokemon/\(id)/"
-        case .getPokemonByName(let name): return "pokemon/\(name)/"
+        case .getNextPokemons(_, _):
+            return "pokemon"
+        case .getPokemonById(let id):
+            return "pokemon/\(id)/"
+        case .getPokemonByName(let name):
+            return "pokemon/\(name)/"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getAllPokemons, .getPokemonById, .getPokemonByName: return .get
+        case .getNextPokemons, .getPokemonById, .getPokemonByName: return .get
         }
     }
     
     var task: Task {
         switch self {
-        case .getAllPokemons, .getPokemonById, .getPokemonByName: return .requestPlain
+        case .getNextPokemons, .getPokemonById, .getPokemonByName: return .requestPlain
         }
     }
     
@@ -51,5 +59,4 @@ extension PokemonAPI: TargetType {
     var sampleData: Data {
         return "Sample data.".utf8Encoded
     }
-    
 }

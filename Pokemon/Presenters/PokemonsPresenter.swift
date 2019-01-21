@@ -33,7 +33,8 @@ class PokemonsPresenter: PokemonsPresenterProtocol {
     fileprivate var pokemonList: PokemonList?
     fileprivate var isLoading: Bool = false
     fileprivate let requestService = RequestService()
-    fileprivate var limit: Int = 20
+    fileprivate let limit: Int = 30
+    fileprivate var offset: Int = 0
     fileprivate var isFiltering: Bool = false
     fileprivate var filteredArray = Array<Pokemon>()
     
@@ -72,17 +73,28 @@ class PokemonsPresenter: PokemonsPresenterProtocol {
     }
     
     func loadPokemons() {
-        requestService.getPokemonsList(completion: { [weak self] (pokemonList) in
-            self?.pokemonList = pokemonList
+        if offset > pokemonList?.count ?? 0 {
+            return
+        }
+        requestService.getPokemonsList(offset: offset, limit: limit, completion: { [weak self] (pokemonList) in
+            guard let `self` = self else { return }
+            if self.offset == 0 {
+                self.pokemonList = pokemonList
+            } else {
+                self.pokemonList?.results.append(contentsOf: pokemonList.results)
+            }
             for item in pokemonList.results {
                 let stringId: String = item.url.removePrefix(Constants.baseURL+"pokemon/").removeSufix("/")
                 let itemId: Int = Int(stringId) ?? 0
-                self?.pokemonsIds.append(itemId)
+                if !self.pokemonsIds.contains(itemId) {
+                    self.pokemonsIds.append(itemId)
+                }
             }
-            self?.pokemonsIds.count == pokemonList.count ? print("✅ \(pokemonList.count) ids parsed") : print("🅾️ ids parsed")
-            self?.isLoading = false
-            self?.isFiltering = false
-            self?.loadMore()
+            self.pokemonsIds.count == pokemonList.count ? print("✅ \(pokemonList.count) ids parsed") : print("🅾️ ids parsed")
+            self.isLoading = false
+            self.isFiltering = false
+            self.loadMore()
+            self.offset += self.limit
         }) { (serverError) in
             print("ERROR: \(String(describing: serverError.statusCode))  \(String(describing: serverError.errorMessage))")
         }
@@ -101,9 +113,8 @@ class PokemonsPresenter: PokemonsPresenterProtocol {
         if begin < pokemonList?.count ?? 0 {
             var count: Int = 0
             for idx in begin..<end {
-                requestService.getPokemonBy(
-                    id: self.pokemonsIds[idx],
-                    completion: { [weak self] (pokemon) in
+                requestService.getPokemonBy(id: self.pokemonsIds[idx],
+                                            completion: { [weak self] (pokemon) in
                         guard let `self` = self else { return }
                         count += 1
                         self.pokemons.insert(pokemon)
@@ -144,17 +155,17 @@ class PokemonsPresenter: PokemonsPresenterProtocol {
     }
     
     func changeLimit(grid: GridType) {
-        switch grid {
-        case .two:
-            limit = 20
-            break
-        case .three:
-            limit = 30
-            break
-        case .four:
-            limit = 40
-            break
-        }
+//        switch grid {
+//        case .two:
+//            limit = 20
+//            break
+//        case .three:
+//            limit = 30
+//            break
+//        case .four:
+//            limit = 40
+//            break
+//        }
     }
     
     func pullToRefresh() {

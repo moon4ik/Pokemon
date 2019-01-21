@@ -33,6 +33,7 @@ class PokemonsViewController: UIViewController {
         }
     }
     fileprivate var presenter: PokemonsPresenterProtocol!
+    fileprivate var isWating = false
     
     //MARK: - Lifecycle
     
@@ -104,6 +105,7 @@ class PokemonsViewController: UIViewController {
         }
         self.collectionView.collectionViewLayout = flowLayout
         self.collectionView.collectionViewLayout.invalidateLayout()
+        self.collectionView.setContentOffset(.zero, animated: true)
 //        UIView.animate(withDuration: 1, delay: 0,
 //                       usingSpringWithDamping: 0.8,
 //                       initialSpringVelocity: 5,
@@ -134,6 +136,7 @@ extension PokemonsViewController: PokemonsVCProtocol {
             refreshControl.endRefreshing()
         }
         collectionView.reloadData()
+        isWating = false
     }
     
     func present(viewController: UIViewController) {
@@ -162,8 +165,9 @@ extension PokemonsViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row > presenter.numberOfRows(inSection: indexPath.section)-presenter.limitCount() {
-            presenter.loadMore()
+        if indexPath.row > presenter.numberOfRows(inSection: indexPath.section)-4 && !isWating{
+            isWating = true
+            presenter.loadPokemons()
         }
     }
 }

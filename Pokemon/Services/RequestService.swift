@@ -11,16 +11,16 @@ import Moya
 
 struct RequestService {
     
-//    let provider = MoyaProvider<PokemonAPI>(plugins: [NetworkLoggerPlugin(verbose: true)])
-    let provider = MoyaProvider<PokemonAPI>()
+    let provider = MoyaProvider<PokemonAPI>(plugins: [NetworkLoggerPlugin(verbose: true)])
+//    let provider = MoyaProvider<PokemonAPI>()
     
     /// Get list of all pokemons only with name and url
     ///
     /// - Parameters:
     ///   - completion: completion return PokemonList model
     ///   - failure: return ServerError model
-    func getPokemonsList(completion: @escaping (PokemonList) -> (), failure: @escaping (ServerError) -> ()) {
-        provider.request(.getAllPokemons) { (result) in
+    func getPokemonsList(offset: Int = 0, limit: Int = 20, completion: @escaping (PokemonList) -> (), failure: @escaping (ServerError) -> ()) {
+        provider.request(.getNextPokemons(offset: offset, limit: limit)) { (result) in
             switch result {
             case .success(let response):
                 do {
@@ -38,6 +38,8 @@ struct RequestService {
             }
         }
     }
+    
+   
     
     
     /// Request of Pokemon detail information

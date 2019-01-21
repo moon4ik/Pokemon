@@ -166,8 +166,8 @@
 			isa = PBXGroup;
 			children = (
 				7340A114219A31E900A4BC40 /* PokemonAPI.swift */,
-				7340A13B219E1E2C00A4BC40 /* ImageCacheService.swift */,
 				7340A116219A327300A4BC40 /* RequestService.swift */,
+				7340A13B219E1E2C00A4BC40 /* ImageCacheService.swift */,
 				736CDE6E219E91E200F34342 /* Logger.swift */,
 				7340A13F219E28E700A4BC40 /* AlertService.swift */,
 				7340A14E219E4EA500A4BC40 /* ReachabilityService.swift */,
